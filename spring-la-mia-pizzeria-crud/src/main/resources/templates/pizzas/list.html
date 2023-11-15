@@ -57,9 +57,17 @@
                 </form>
             </td>
             <td th:text="|€${pizza.price}|"></td>
-            <td th:text="${pizza.name}"></td>
+            <td>
+                <span th:text="${pizza.name}"></span>
+                <img th:if=" ${pizza.offers.size() !=0}"
+                     style="max-width: 35px; margin-left: 5px; transform: rotate(20deg);"
+                     src="https://dematteohome.it/img/cms/bollino-special-promo.png"
+                     alt="bollino">
+            </td>
             <td class="descrizione_pizza" th:text="${pizza.description}"></td>
-            <td><img class="foto_pizza" th:src="${pizza.photo}" alt="pizza"></td>
+            <td>
+                <img class="foto_pizza" th:src="${pizza.photo}" alt="pizza">
+            </td>
         </tr>
         </tbody>
     </table>
