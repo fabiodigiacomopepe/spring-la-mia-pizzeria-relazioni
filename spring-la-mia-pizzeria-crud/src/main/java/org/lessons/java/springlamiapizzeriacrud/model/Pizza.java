@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 // Entity indica che la classe è una tabella
 // Table serve per indicare il nome della tabella se è diverso da nome della classe
@@ -30,7 +32,18 @@ public class Pizza {
     @DecimalMin(value = "0.01", message = "Il prezzo non può essere uguale/inferiore zero")
     private BigDecimal price;
 
+    @OneToMany(mappedBy = "pizza")
+    private List<Offer> offers = new ArrayList<>();
+
     // GETTER E SETTER (FONDAMENTALI)
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
+
     public Integer getId() {
         return id;
     }
