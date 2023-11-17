@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaft.org">
 <head th:insert="fragments/resources :: headResources('Pizza List')"></head>
 <body>
+<nav th:replace="fragments/navbar :: topNavbar('pizzas')"></nav>
 <div class="container">
     <div th:if="${message !=null}" class="alert alert-success alert-dismissible fade show">
         <span th:text="${message}"></span>
@@ -25,7 +26,7 @@
         </form>
     </div>
 
-    <div th:if="${pizzaList.empty}" style="background-color: white; padding: 20px;">
+    <div th:if="${pizzaList.empty}" class="alert alert-info" style="margin-top: 30px;">
         <h2>Nessuna pizza presente in lista.</h2>
     </div>
 

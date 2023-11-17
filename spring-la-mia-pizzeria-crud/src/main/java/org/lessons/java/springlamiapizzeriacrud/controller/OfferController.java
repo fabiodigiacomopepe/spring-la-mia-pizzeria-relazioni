@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/offers")
 public class OfferController {
     @Autowired
-    OfferService offerService;
+    private OfferService offerService;
 
     // Rotta "/offers/create" (GET)
     @GetMapping("/create")

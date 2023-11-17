@@ -6,3 +6,8 @@ INSERT INTO pizzas (description, name, photo, price) VALUES('pomodoro, mozzarell
 INSERT INTO pizzas (description, name, photo, price) VALUES('pomodoro, mozzarella, olive nere, capperi, acciughe', 'Napoletana', 'https://img.freepik.com/premium-photo/italian-pizza-with-anchovy-capers-white-background_636803-281.jpg?w=2000', 6.20);
 INSERT INTO pizzas (description, name, photo, price) VALUES('pomodoro, mozzarella, speck, funghi', 'Alpina', 'https://www.menu.it/media/ricette/pizza-porcini-speck-e-tartufo-133462/conversions/Spe_k_new-main.jpg', 6.80);
 INSERT INTO pizzas (description, name, photo, price) VALUES('pomodoro, mozzarella, tonno, cipolla', 'Tonno e Cipolla', 'https://primochef.it/wp-content/uploads/2022/03/SH_pizza_tonno_e_cipolla.jpg', 6.00);
+
+INSERT INTO ingredients (name) VALUES('pomodoro');
+INSERT INTO ingredients (name) VALUES('mozzarella');
+INSERT INTO ingredients (name) VALUES('basilico');
+INSERT INTO ingredients (name) VALUES('prosciutto');

@@ -5,9 +5,12 @@
 <div class="container" th:object="${pizza}" style="background-color: white; padding: 20px; margin: 30px auto;">
     <h1 th:text="*{name}"></h1>
     <hr>
+    <div class="mt-2" style="margin-bottom: 10px;">
+        <a th:href="@{/pizzas}" class="btn btn-primary">Torna alla lista</a>
+    </div>
     <dl class="d-flex align-items-center justify-content-between">
         <div style="width: 70%; font-size: 25px;">
-            <dt>Ingredienti</dt>
+            <dt>Descrizione</dt>
             <dd th:text="*{description}"></dd>
             <dt>Prezzo</dt>
             <dd th:text="|€*{price}|"></dd>
@@ -17,8 +20,12 @@
         </div>
     </dl>
 
-    <div class="mt-2" style="margin-bottom: 50px;">
-        <a th:href="@{/pizzas}" class="btn btn-primary">Torna alla lista</a>
+    <div class="col-4" style="margin-bottom: 40px;">
+        <h3>Ingredienti</h3>
+        <ul th:if="*{ingredients.size() > 0}">
+            <li th:each="ingredient : *{ingredients}" th:text="${ingredient.name}"></li>
+        </ul>
+        <div th:unless="*{ingredients.size() > 0}" class="alert alert-info">La lista di ingredienti è vuota</div>
     </div>
 
     <div style="margin-bottom: 30px;">

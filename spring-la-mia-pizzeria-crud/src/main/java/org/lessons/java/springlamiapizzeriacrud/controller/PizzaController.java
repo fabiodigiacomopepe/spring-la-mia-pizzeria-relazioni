@@ -3,6 +3,7 @@ package org.lessons.java.springlamiapizzeriacrud.controller;
 import jakarta.validation.Valid;
 import org.lessons.java.springlamiapizzeriacrud.exceptions.PizzaNotFoundException;
 import org.lessons.java.springlamiapizzeriacrud.model.Pizza;
+import org.lessons.java.springlamiapizzeriacrud.service.IngredientService;
 import org.lessons.java.springlamiapizzeriacrud.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ import java.util.Optional;
 public class PizzaController {
     @Autowired
     private PizzaService pizzaService;
+
+    @Autowired
+    private IngredientService ingredientService;
 
     // Rotta "/pizzas"
     // Parametro di ricerca è OPZIONALE perchè alla rotta si può accedere sia normalmente sia tramite ricerca
@@ -48,15 +52,17 @@ public class PizzaController {
     public String createGet(Model model) {
         // Istanzio un nuovo oggetto Pizza e lo passo con il model
         model.addAttribute("pizza", new Pizza());
+        model.addAttribute("ingredientList", ingredientService.getAll());
         return "pizzas/create_update";
     }
 
     // Rotta "/pizzas/create" (POST)
     @PostMapping("/create")
-    public String createPost(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String createPost(Model model, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
         // Controllo se ci sono errori
         if (bindingResult.hasErrors()) {
             // Se ci sono ricarico la pagina mantendendo i dati (grazie al model)
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "pizzas/create_update";
         }
         // Recupero l'oggetto Pizza dal model e lo salvo in formPizza
@@ -71,6 +77,7 @@ public class PizzaController {
         try {
             // Passo la pizza con il model
             model.addAttribute("pizza", pizzaService.getPizzaById(id));
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "/pizzas/create_update";
         } catch (PizzaNotFoundException e) {
             // Altrimenti lancio eccezione
@@ -91,9 +98,11 @@ public class PizzaController {
             @Valid
             @ModelAttribute("pizza")
             Pizza formPizza,
-            BindingResult bindingResult) {
+            BindingResult bindingResult,
+            Model model) {
         if (bindingResult.hasErrors()) {
             // Se ci sono errori ricarico la pagina
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "/pizzas/create_update";
         }
         try {
